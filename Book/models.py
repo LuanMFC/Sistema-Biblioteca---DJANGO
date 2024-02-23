@@ -16,8 +16,8 @@ class book(models.Model):
     genre = models.ForeignKey(genre, on_delete=models.PROTECT, related_name='books_genre')
     publishing_company = models.CharField(max_length=200, null=False)
     edition = models.CharField(max_length=50, null=False)
-    price_loan = models.FloatField(null=False)
     photo = models.ImageField(upload_to="static/media")
+    price_loan = models.FloatField(null=False)
     date_published = models.DateField(null=False)
 
     def __str__(self):
