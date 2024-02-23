@@ -19,8 +19,10 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from Book.views import book_ListView, book_CreateView
+from Account.views import Login
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', Login, name="login"),
     path('list/', book_ListView.as_view(), name='list'),
     path('create_book/', book_CreateView.as_view(), name='create_book'),
 

@@ -1,8 +1,6 @@
-body{
-    min-height: 100vh;
-}
+
 main{
-    height: calc(100vh - 13rem);
+    min-height: calc(100vh - 13rem) !important;
 }
 header, footer {
     height: 6.5rem; /* altura do header */
