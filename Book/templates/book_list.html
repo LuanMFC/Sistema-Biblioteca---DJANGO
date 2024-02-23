@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <style>
+        .btn-outline-secondary{
+            color: #6c757d !important;
+        }
+        .btn-outline-secondary:hover{
+            color: #ffffff !important;
+        }
+    </style>
+    <main class="album py-4 bg-light">
+        <div class="d-flex justify-content-center align-items-center mb-3">
+            <form class="d-flex w-25" method="GET" action="{% url 'list' %}">
+                {% csrf_token %}
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+            </form>
+        </div>
+        <section class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+                {% if listBook %}
+                    {% for book in listBook %}
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <img src={{book.photo.url}} alt="" class="bd-placeholder-img card-img-top w-100" height="275" >
+                
+                                <div class="card-body">
+                                    <h4>{{book.title}}</h4>
+                                    <p>Esse {{book.model}}, modelo de fabricação está custando apenas </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-sm btn-outline-secondary ">Detalhes</a>
+                                        {% if user.is_authenticated %}
+                                            <a href="#" class="btn btn-sm btn-outline-secondary ">Editar</a>
+                                        {% endif%}
+                                    </div>
+                                    <small class="text-muted">9 mins</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+
+                {% else%}
+                    <h3>Nâo há carros disponíveis</h3>
+                {% endif %}
+
+            </div>
+        </section>
+
+    </main>
+{% endblock %}
