@@ -5,8 +5,8 @@ from django.contrib.auth import login, logout, authenticate
 
 def Login(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
@@ -23,17 +23,16 @@ def Login(request):
         {"user": user}
     )
 
-def SingIn(request):
+def Register(request):
     if request.method == "POST":
         user = UserCreationForm(request.POST)
-
         if user.is_valid():
             user.save()
             return redirect('list')
         
     else:
         user = UserCreationForm()
-    return render(request,'singin.html', {'userForm': user})
+    return render(request,'register.html', {'user': user})
 
 def Logout(request):
     logout(request)

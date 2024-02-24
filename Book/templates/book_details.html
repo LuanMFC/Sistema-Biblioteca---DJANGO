@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <style>
+        .btn-outline-secondary{
+            color: #6c757d !important;
+        }
+        .btn-outline-secondary:hover{
+            color: #ffffff !important;
+        }
+    </style>
+    <main class="album py-4 bg-light">
+        <section class="container d-flex bg-white rounded p-5 gap-3">
+            <div class="ImageContent">
+                <img src="{{object.photo.url}}" alt="" class="img-fluid rounded" style="max-height: 500px;">
+            </div>
+
+            <div class="TextContent w-50">
+                <div class="Price">
+                    <h1>{{object.title}} - {{object.author}}</h1>
+                    <h3>R$ {{object.price_loan}}</h3>
+                    <hr>
+                    <div class="Content">
+                        <p style="text-align: justify;">
+                            Este {{object.brand}} {{object.model}} {{object.color}} é um carro elegante e confiável, fabricado no ano de {{object.factory_year}}. 
+                            Com apenas {{object.mileage}} km rodados, este carro está em excelente estado. 
+                            Equipado com motor potente e eficiente, tecnologia avançada, 
+                            proporciona uma condução confortável e segura.  
+                            Com sua cor {{object.color}}, este {{object.model}} exala sofisticação e estilo. 
+                            Não perca a oportunidade de adquirir este veículo de 
+                            qualidade por um ótimo preço!</p>
+                    </div>
+                    {% if user.is_authenticated %}
+                        <div class="btn-group">
+                            <a href="" class="btn btn-md btn-outline-secondary ">Editar</a>
+                            <a href="#" class="btn btn-md btn-outline-secondary ">Deletar</a>
+
+
+                        </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+{% endblock %}

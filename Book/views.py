@@ -1,4 +1,4 @@
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView
 from Book.forms import BookForm
 from Book.models import book
 
@@ -21,4 +21,19 @@ class book_CreateView(CreateView):
     form_class = BookForm
     template_name = 'book_create.html'
     success_url = '/list'
-    
+
+class book_DetailView(DetailView):
+    model = book
+    template_name = 'book_details.html'
+
+class book_UpdateView(UpdateView):
+    model = book
+    form_class = BookForm
+    template_name = 'book_update.html'
+    success_url = '/list'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Adicione o formulário ao contexto
+        context['form'] = self.get_form()
+        return context

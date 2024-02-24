@@ -18,12 +18,18 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-from Book.views import book_ListView, book_CreateView
-from Account.views import Login
+from Book.views import book_ListView, book_CreateView, book_DetailView, book_UpdateView
+from Account.views import Login, Register, Logout
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', Login, name="login"),
+    path('register/', Register, name="register"),
+    path('logout/', Logout, name="logout"),
     path('list/', book_ListView.as_view(), name='list'),
     path('create_book/', book_CreateView.as_view(), name='create_book'),
+    path('list/<int:pk>/', book_DetailView.as_view(), name='details_book'),
+    path('list/<int:pk>/update', book_UpdateView.as_view(), name='update_book'),
+
+
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
