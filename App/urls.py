@@ -18,7 +18,8 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-from Book.views import book_ListView, book_CreateView, book_DetailView, book_UpdateView
+from Book.views import book_ListView, book_CreateView, book_DetailView, book_UpdateView, book_DeleteView
+from Book.views import LoanCreateView, LoanListView
 from Account.views import Login, Register, Logout
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,6 +30,10 @@ urlpatterns = [
     path('create_book/', book_CreateView.as_view(), name='create_book'),
     path('list/<int:pk>/', book_DetailView.as_view(), name='details_book'),
     path('list/<int:pk>/update', book_UpdateView.as_view(), name='update_book'),
+    path('list/<int:pk>/delete/', book_DeleteView.as_view(), name='delete_book'),
+    path('loan/', LoanCreateView.as_view(), name='loan_book'),
+    path('list_loan/', LoanListView.as_view(), name='loanlist_book'),
+
 
 
 

@@ -26,7 +26,7 @@ class book(models.Model):
 class loan(models.Model):
     name_user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='user_loans')
     name_book = models.ForeignKey(book, on_delete=models.PROTECT, related_name='book_loans')
-    loan_rate = models.FloatField(null=False)
+    loan_rate = models.FloatField(null=True)
     loan_created_at = models.DateTimeField(auto_now_add=True)
 
     def Meta(self):

@@ -33,8 +33,8 @@
                     </div>
                     {% if user.is_authenticated %}
                         <div class="btn-group">
-                            <a href="" class="btn btn-md btn-outline-secondary ">Editar</a>
-                            <a href="#" class="btn btn-md btn-outline-secondary ">Deletar</a>
+                            <a href="{% url 'update_book' book.pk %}" class="btn btn-md btn-outline-secondary ">Editar</a>
+                            <button class="btn btn-md btn-outline-secondary" type="button" id="DeleteButton">Deletar</button>
 
 
                         </div>
@@ -43,6 +43,56 @@
                 </div>
             </div>
         </section>
+
+
+  <!-- Modal -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    document.getElementById("DeleteButton").addEventListener("click", function() {
+        Swal.fire({
+            title: "Deseja excluir esse livro: {{object.title}}",
+            text: "Se excluir, todos os dados do livro serão perdidos!",
+            showDenyButton: true,
+            confirmButtonText: "Sim, excluir",
+            denyButtonText: `Cancelar`
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+            // Realiza a exclusão via AJAX
+            console.log("ooooooooooooo potencia")
+                $.ajax({
+                    url: "{% url 'delete_book' book.pk %}", // Substitua 'delete_book' pela URL da sua view de exclusão
+                    type: "POST", // Ou "DELETE", dependendo da configuração da sua view
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}' // Adiciona o token CSRF
+                    },
+                    success: function(response) {
+                        // Exibe uma mensagem de sucesso
+                        Swal.fire({
+                            icon: "success",
+                            title: "Livro excluído!",
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(() => {
+                            // Redireciona para a página inicial ou outra página após a exclusão
+                            window.location.href = "{% url 'list' %}"; // Substitua 'pagina_inicial' pela URL desejada
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        // Exibe uma mensagem de erro
+                        Swal.fire({
+                            icon: "error",
+                            title: "Erro ao excluir o livro",
+                            text: "Por favor, tente novamente mais tarde."
+                        });
+                    }
+                });
+            }
+        })
+    })
+    
+  </script>
 
     </main>
 {% endblock %}

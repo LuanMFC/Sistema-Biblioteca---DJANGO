@@ -29,7 +29,14 @@
             <li><a href="{% url 'list'%}" class="nav-link px-2 link-dark">Livros</a></li>
 
             {% if user.is_authenticated %}
-              <li><a href="#" class="nav-link px-2 link-dark">Empréstimos</a></li>
+              <li class="dropdown">
+                <button class="nav-link px-2 link-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Empréstimos</button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item nav-link px-2 link-dark" href="#">Listar Empréstimos</a></li>
+                  <li><a class="dropdown-item nav-link px-2 link-dark" href="{% url 'loan_book'%}">Cadastrar Emprestimos</a></li>
+                </ul>
+              </li>
+              
               <li><a href="{% url 'create_book'%}" class="nav-link px-2 link-dark">Cadastrar Livro</a></li>
             {% endif %}
           </ul>
