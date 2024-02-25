@@ -1,6 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
-
 # Create your models here.
 
 class genre(models.Model):
@@ -22,15 +20,3 @@ class book(models.Model):
 
     def __str__(self):
         return f'{self.title} - {self.edition}'
-    
-class loan(models.Model):
-    name_user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='user_loans')
-    name_book = models.ForeignKey(book, on_delete=models.PROTECT, related_name='book_loans')
-    loan_rate = models.FloatField(null=True)
-    loan_created_at = models.DateTimeField(auto_now_add=True)
-
-    def Meta(self):
-        ordering = ['-loan_created_at']
-
-    def __self__(self):
-        return f'{self.name_user} - {self.name_book}'

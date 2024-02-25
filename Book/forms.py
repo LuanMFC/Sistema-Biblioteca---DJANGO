@@ -1,5 +1,5 @@
 from django import forms
-from Book.models import book, loan
+from Book.models import book
 
 class BookForm(forms.ModelForm):
 
@@ -13,8 +13,3 @@ class BookForm(forms.ModelForm):
             self.add_error('price','O preço deve ser maior que zero')
         return price
     
-class LoanForm(forms.ModelForm):
-
-    class Meta:
-        model = loan
-        fields = ('__all__')

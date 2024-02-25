@@ -1,7 +1,7 @@
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
-from Book.forms import BookForm, LoanForm
-from Book.models import book, loan
-from django.urls import reverse_lazy
+from Book.forms import BookForm
+from Book.models import book
+
 
 # Create your views here.
 class book_ListView(ListView):
@@ -37,18 +37,3 @@ class book_DeleteView(DeleteView):
     model = book
     success_url = '/list'
 
-
-class LoanCreateView(CreateView):
-    model = loan
-    template_name = 'loan_create.html'
-    form_class = LoanForm
-    success_url = '/list'
-
-class LoanListView(ListView):
-    model = loan
-    template_name = 'loan_list.html'
-    context_object_name = 'loan'
-
-    def get_queryset(self):
-        # Carrega todos os objetos de Loan, juntamente com os objetos relacionados de Book
-        return loan.objects.prefetch_related('name_book').all()

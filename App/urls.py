@@ -19,7 +19,7 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from Book.views import book_ListView, book_CreateView, book_DetailView, book_UpdateView, book_DeleteView
-from Book.views import LoanCreateView, LoanListView
+from Loan.views import LoanCreateView, LoanListView
 from Account.views import Login, Register, Logout
 urlpatterns = [
     path('admin/', admin.site.urls),

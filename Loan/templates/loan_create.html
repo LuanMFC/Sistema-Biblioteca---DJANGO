@@ -10,8 +10,7 @@
                 <div class="row g-3">
                     {% for field in form %}
                         {% with field_label_lower=field.label|lower %}
-           
-                            {% if field_label_lower == 'name user' or field_label_lower == 'name book' %}
+                            {% if field_label_lower == 'name book' %}
                                 <div class="col-md-12">
                                     <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
                                     <select class="form-select" id="{{ field.id_for_label }}" name="{{ field.name }}">
@@ -21,7 +20,7 @@
                                     </select>
                                 </div>
 
-                            {% else %}
+                            {% elif field_label_lower == 'loan rate' %}
                                 <div class="col-md-12">
                                     <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
                                     <input type="number" class="form-control" id="{{ field.id_for_label }}" name="{{ field.name }}">
