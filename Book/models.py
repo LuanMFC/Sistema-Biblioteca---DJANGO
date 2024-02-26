@@ -17,6 +17,7 @@ class book(models.Model):
     photo = models.ImageField(upload_to="static/media")
     price_loan = models.FloatField(null=False)
     date_published = models.DateField(null=False)
+    synopsis = models.TextField(max_length=300, default="", blank=True)
 
     def __str__(self):
         return f'{self.title} - {self.edition}'
