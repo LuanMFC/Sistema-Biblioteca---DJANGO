@@ -1,7 +1,7 @@
 import os
 from openai import OpenAI
 client = OpenAI(
-    api_key= "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"
+    api_key= "CHAVEAPI"
 )
 def get_book_synopsis(title, author, publishing_company, edition):
     messageSynopsis = '''
