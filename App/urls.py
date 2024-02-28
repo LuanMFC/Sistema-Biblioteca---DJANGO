@@ -33,8 +33,5 @@ urlpatterns = [
     path('list/<int:pk>/delete/', book_DeleteView.as_view(), name='delete_book'),
     path('loan/', LoanCreateView.as_view(), name='loan_book'),
     path('list_loan/', LoanListView.as_view(), name='loanlist_book'),
-
-
-
-
+    path('',book_ListView.as_view(), name='list')
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
